@@ -9,8 +9,13 @@ import com.example.actividad_2_moviles_viu.databinding.MovieItemDetailBinding
 import com.example.actividad_2_moviles_viu.models.Movie
 import com.example.actividad_2_moviles_viu.services.AppService
 import com.squareup.picasso.Picasso
+import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
+@AndroidEntryPoint
 class MovieItemDetail : AppCompatActivity() {
+    @Inject
+    lateinit var appService: AppService
     private lateinit var binding: MovieItemDetailBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -37,7 +42,7 @@ class MovieItemDetail : AppCompatActivity() {
         builder.setMessage("Are you sure you want to Delete the movie ${movie.name}?")
             .setCancelable(false)
             .setPositiveButton("Yes") { dialog, id ->
-                AppService.deleteMovie(movie.id, this)
+                appService.deleteMovie(movie.id, this)
                 this.onBackPressed()
             }
             .setNegativeButton("No") { dialog, id ->

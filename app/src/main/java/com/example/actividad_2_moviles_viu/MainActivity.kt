@@ -23,10 +23,13 @@ import retrofit2.Callback
 import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
+    @Inject
+    lateinit var appService: AppService
     private lateinit var binding: ActivityMainBinding
     private lateinit var adapter: MovieAdapter
     private val movies = mutableListOf<Movie>()
@@ -59,7 +62,7 @@ class MainActivity : AppCompatActivity() {
                 response: Response<MutableList<Movie>>
             ) {
                 val moviesResponse = response.body()!!
-                AppService.setMovies(moviesResponse, this@MainActivity)
+                appService.setMovies(moviesResponse, this@MainActivity)
                 getStoredMovies()
                 binding.progressBar.visibility = View.INVISIBLE;
             }
@@ -100,8 +103,8 @@ class MainActivity : AppCompatActivity() {
 
     private fun getStoredMovies(){
         movies.clear()
-        val storedMovies = AppService.getStoredMovies(this)
-        AppService.setMovies(storedMovies, this)
+        val storedMovies = appService.getStoredMovies(this)
+        appService.setMovies(storedMovies, this)
         movies.addAll(storedMovies)
         adapter.notifyDataSetChanged()
 
