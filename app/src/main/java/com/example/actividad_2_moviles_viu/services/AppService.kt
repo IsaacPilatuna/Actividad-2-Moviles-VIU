@@ -6,8 +6,9 @@ import com.example.actividad_2_moviles_viu.adapters.MovieAdapter
 import com.example.actividad_2_moviles_viu.models.Movie
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
+import javax.inject.Inject
 
-class AppService {
+class AppService @Inject constructor() {
     companion object{
         private val movies = mutableListOf<Movie>()
 

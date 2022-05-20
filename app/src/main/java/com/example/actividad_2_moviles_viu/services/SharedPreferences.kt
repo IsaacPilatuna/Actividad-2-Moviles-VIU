@@ -3,8 +3,9 @@ package com.example.actividad_2_moviles_viu.services
 import android.app.Activity
 import android.content.Context
 import androidx.fragment.app.FragmentActivity
+import javax.inject.Inject
 
-class SharedPreferences {
+class SharedPreferences @Inject constructor() {
     companion object{
         fun  getPreferenceString(activity: Activity, key:String):String?{
             val sharedPreferences =  activity.getSharedPreferences("AppSharedPreferences",
